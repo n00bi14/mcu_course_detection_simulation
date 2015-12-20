@@ -6,6 +6,8 @@ Player::Player(QObject *parent)
  : QThread(parent)
 {
     stop = true;
+    videoStart = 9;
+    cannyThreshold = 80;
 }
 
 bool Player::loadVideo(string filename) {
@@ -34,13 +36,28 @@ void Player::processFrame(Mat& frame)
     if(frame.channels() == 3)
         cvtColor(frame, frame, CV_BGR2GRAY);
 
-    GaussianBlur(frame, frame, Size(3, 3), 4);
-    Canny(frame, frame, cannyThreshold, cannyThreshold);
+//    GaussianBlur(frame, frame, Size(3, 3), 4);
+//    Canny(frame, frame, cannyThreshold, cannyThreshold);
+
+    Mat dst, cdst;
+//    Canny(frame, dst, 50, 200, 3);
+    Canny(frame, dst, cannyThreshold, cannyThreshold, 3);
+    cvtColor(dst, cdst, CV_GRAY2BGR);
+
+    vector<Vec4i> lines;
+    HoughLinesP(dst, lines, 1, CV_PI/180, 50, 50, 10 );
+    for( size_t i = 0; i < lines.size(); i++ )
+    {
+        Vec4i l = lines[i];
+        line( cdst, Point(l[0], l[1]), Point(l[2], l[3]), Scalar(0,0,255), 3, CV_AA);
+    }
+    cdst.copyTo(frame);
 }
 
 void Player::run()
 {
     int delay = (1000/frameRate);
+    getFrame(videoStart,capture,frame);
     while(!stop){
         if (!capture.read(frame))
         {
@@ -90,4 +107,12 @@ void Player::setCannyThreshold(int t)
     mutex.lock();
     this->cannyThreshold = t;
     mutex.unlock();
+}
+
+void Player::getFrame(int second,VideoCapture& cap, Mat& frame){
+    for(int i = 0; i < second; i++){
+        for(int j = 0; j < cap.get(CV_CAP_PROP_FPS); j++){
+            cap >> frame;
+        }
+    }
 }

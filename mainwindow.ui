@@ -15,16 +15,6 @@
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayout">
-    <item row="3" column="2">
-     <widget class="QWidget" name="widget_2" native="true">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-     </widget>
-    </item>
     <item row="2" column="2">
      <widget class="QPushButton" name="btnPlay">
       <property name="sizePolicy">
@@ -57,7 +47,7 @@
        <number>800</number>
       </property>
       <property name="value">
-       <number>100</number>
+       <number>80</number>
       </property>
       <property name="orientation">
        <enum>Qt::Horizontal</enum>
@@ -87,6 +77,16 @@
       </property>
      </widget>
     </item>
+    <item row="3" column="2">
+     <widget class="QWidget" name="widget_2" native="true">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+     </widget>
+    </item>
     <item row="4" column="2">
      <widget class="QLabel" name="lblCannyThresh">
       <property name="text">
@@ -102,7 +102,7 @@
      <x>0</x>
      <y>0</y>
      <width>824</width>
-     <height>18</height>
+     <height>20</height>
     </rect>
    </property>
   </widget>

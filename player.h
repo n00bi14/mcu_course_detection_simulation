@@ -24,6 +24,8 @@ class Player : public QThread
     Mat RGBframe;
     QImage img;
     void processFrame(Mat &frame);
+    void getFrame(int second,VideoCapture& cap, Mat& frame);
+    int videoStart;
     int cannyThreshold;
 
  signals:
