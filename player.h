@@ -8,6 +8,9 @@
 #include <opencv2/core/core.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
 #include <opencv2/highgui/highgui.hpp>
+#include <vector>
+#include "player.h"
+#include "line.h"
 
 using namespace cv;
 
@@ -24,9 +27,10 @@ class Player : public QThread
     Mat RGBframe;
     QImage img;
     void processFrame(Mat &frame);
-    void getFrame(int second,VideoCapture& cap, Mat& frame);
+    void getFrame(double second, VideoCapture& cap, Mat& frame);
     int videoStart;
     int cannyThreshold;
+    bool lineInRegionOfIntrest(Rect& roi, Vec4i& line);
 
  signals:
  //Signal to output frame to be displayed
@@ -50,6 +54,13 @@ class Player : public QThread
     //check if the player has been stopped
     bool isStopped() const;
     void setCannyThreshold(int t);
+
+     void makeSobelX(const Mat& img, Mat& dst);
+     void makeSobelY(const Mat& img, Mat& dst);
+     vector<Line> getLines(const Mat& src, Rect roi, bool isVertical);
+     vector<Point> cornerDetect(const Mat& src, const Rect& roi);
+     void toSW(Mat& img, int threshold);
+     double detectDirection(const Mat& frame);
 };
 
 #endif // PLAYER_H

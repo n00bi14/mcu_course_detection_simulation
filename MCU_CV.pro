@@ -14,15 +14,18 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    player.cpp
+    player.cpp \
+    line.cpp
 
 HEADERS  += mainwindow.h \
-    player.h
+    player.h \
+    line.h
 
 FORMS    += mainwindow.ui
 
-INCLUDEPATH += -I/usr/local/include
-INCLUDEPATH += -I/usr/local/include/opencv
+INCLUDEPATH += /usr/include/opencv2\
+                /usr/include/opencv
+
 
 LIBS += -L/usr/local/lib
 LIBS += -lopencv_highgui

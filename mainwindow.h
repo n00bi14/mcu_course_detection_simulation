@@ -5,7 +5,12 @@
 #include <QFileDialog>
 #include <QMessageBox>
 #include <QString>
-#include <player.h>
+#include <vector>
+#include "player.h"
+#include "line.h"
+
+using namespace std;
+using namespace cv;
 
 namespace Ui {
 class MainWindow;
@@ -27,6 +32,7 @@ private slots:
     void on_btnPlay_clicked();
 
     void on_sldThreshold_valueChanged(int value);
+
 
 private:
     Ui::MainWindow *ui;

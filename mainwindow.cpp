@@ -60,3 +60,4 @@ void MainWindow::on_sldThreshold_valueChanged(int value)
     ui->lblCannyThresh->setText(QString::number(value));
     myPlayer->setCannyThreshold(value);
 }
+
