@@ -42,7 +42,7 @@
      </widget>
     </item>
     <item row="4" column="1">
-     <widget class="QSlider" name="sldThreshold">
+     <widget class="QSlider" name="sldTime">
       <property name="maximum">
        <number>800</number>
       </property>
@@ -51,13 +51,6 @@
       </property>
       <property name="orientation">
        <enum>Qt::Horizontal</enum>
-      </property>
-     </widget>
-    </item>
-    <item row="4" column="0">
-     <widget class="QLabel" name="label">
-      <property name="text">
-       <string>Canny Thresh:</string>
       </property>
      </widget>
     </item>
@@ -102,7 +95,7 @@
      <x>0</x>
      <y>0</y>
      <width>824</width>
-     <height>20</height>
+     <height>18</height>
     </rect>
    </property>
   </widget>

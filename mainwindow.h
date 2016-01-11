@@ -31,12 +31,12 @@ private slots:
     // Slot for the play push button.
     void on_btnPlay_clicked();
 
-    void on_sldThreshold_valueChanged(int value);
-
+    void on_sldTime_valueChanged(int value);
 
 private:
     Ui::MainWindow *ui;
     Player* myPlayer;
+    bool update = false;
 
 };
 

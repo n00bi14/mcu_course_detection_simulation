@@ -21,6 +21,9 @@ void MainWindow::updatePlayerUI(QImage img)
     {
         ui->lblVideo->setAlignment(Qt::AlignCenter);
         ui->lblVideo->setPixmap(QPixmap::fromImage(img).scaled(ui->lblVideo->size(), Qt::KeepAspectRatio, Qt::FastTransformation));
+        update = true;
+        ui->sldTime->setValue(ui->sldTime->value() + 1);
+        update = false;
     }
 }
 
@@ -37,6 +40,9 @@ void MainWindow::on_btnLoad_clicked()
             msgBox.setText("The selected video could not be opened!");
             msgBox.exec();
         }
+
+        ui->sldTime->setMaximum(myPlayer->getFrameCount());
+        ui->sldTime->setValue(0);
     }
 }
 
@@ -53,11 +59,9 @@ void MainWindow::on_btnPlay_clicked()
     }
 }
 
-void MainWindow::on_sldThreshold_valueChanged(int value)
-{
-    //--this can read process memory and print it into a QString. <- is this a security vulanebility ind qt?
-    // ui->lblCannyThresh->setText(QString(value + ""));
-    ui->lblCannyThresh->setText(QString::number(value));
-    myPlayer->setCannyThreshold(value);
-}
 
+void MainWindow::on_sldTime_valueChanged(int value)
+{
+    if(!update)
+        myPlayer->goTo(value);
+}

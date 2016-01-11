@@ -17,7 +17,7 @@ public:
     double m, y0, omega;
     cv::Vec2d r;
 
-    void draw(cv::Mat& src);
+    void draw(cv::Mat& src, cv::Scalar color);
 };
 
 #endif // LINE_H

@@ -11,6 +11,7 @@
 #include <vector>
 #include "player.h"
 #include "line.h"
+#include <mutex>
 
 using namespace cv;
 
@@ -31,6 +32,11 @@ class Player : public QThread
     int videoStart;
     int cannyThreshold;
     bool lineInRegionOfIntrest(Rect& roi, Vec4i& line);
+     Rect roi_center;
+     Rect roi_left;
+     Rect roi_right;
+      double videoLen;
+       std::mutex videoMutex;
 
  signals:
  //Signal to output frame to be displayed
@@ -57,10 +63,13 @@ class Player : public QThread
 
      void makeSobelX(const Mat& img, Mat& dst);
      void makeSobelY(const Mat& img, Mat& dst);
-     vector<Line> getLines(const Mat& src, Rect roi, bool isVertical);
+     vector<Line> getLines( Mat& src, Rect roi, bool isVertical);
      vector<Point> cornerDetect(const Mat& src, const Rect& roi);
      void toSW(Mat& img, int threshold);
-     double detectDirection(const Mat& frame);
+     double detectDirection(Mat& frame, vector<Line> &ownLines);
+      int getFrameCount();
+       double getTime();
+       void goTo(double frame);
 };
 
 #endif // PLAYER_H

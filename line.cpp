@@ -19,7 +19,8 @@ Line::Line(double r, double omega)
     this->y0 =  pRight.y - m * pRight.x;
 }
 
-void Line::draw(cv::Mat& src){
+void Line::draw(cv::Mat& src, cv::Scalar color){
 
-    cv::line(src, cv::Point(cvRound(pRight.x), cvRound(pRight.y)), cv::Point(cvRound(pLeft.x), cvRound(pLeft.y)), cv::Scalar(0, 0, 255), 1, CV_AA);
+    cv::line(src, cv::Point(cvRound(pRight.x), cvRound(pRight.y)), cv::Point(cvRound(pLeft.x), cvRound(pLeft.y)), color, 1, CV_AA);
+
 }
